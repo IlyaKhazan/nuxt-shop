@@ -16,8 +16,9 @@ export default { components: { AddItemBlock, ItemList } };
   margin: 0 auto;
   width: 100%;
   display: flex;
+  gap: 16px;
   flex-wrap: wrap;
-  justify-content: space-between;
+
   padding: 32px;
 }
 </style>
