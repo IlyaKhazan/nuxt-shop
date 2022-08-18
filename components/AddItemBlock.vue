@@ -1,52 +1,61 @@
 <template>
-  <div class="addItemBlock">
-    <h1 class="addItemBlock__title">Добавление товара</h1>
-    <form class="addItemBlock__form" action="">
-      <FormInputBox><input type="text" /></FormInputBox>
-      <FormInputBox><textarea rows="5"></textarea></FormInputBox>
-      <FormInputBox><input type="text" /></FormInputBox>
-      <FormInputBox><input type="text" /></FormInputBox>
-
-      <FormButton />
-    </form>
-  </div>
+    <section :class="$style.root">
+        <h2 :class="$style.title">Добавление товара</h2>
+        <form :class="$style.form" action="">
+            <FormField v-model="data.name" placeholder="Введите наименование товара" required
+                >Наименование товара
+            </FormField>
+            <FormField v-model="data.info" placeholder="Введите описание товара" textarea>Описание товара</FormField>
+            <FormField v-model="data.imgSrc" placeholder="Введите ссылку" required>
+                Ссылка на изображение товара
+            </FormField>
+            <FormField v-model="data.price" placeholder="Введите цену" required>Цена товара</FormField>
+            <FormButton text="Добавить товар" @click="click" :disabled="true" />
+        </form>
+    </section>
 </template>
 
 <script>
-import FormInputBox from "./UI/FormInputBox.vue";
+import FormField from "./UI/FormField.vue";
 import FormButton from "./UI/FormButton.vue";
-export default { components: { FormInputBox, FormButton } };
+
+export default {
+    name: "AddItemBlock",
+    components: {FormField, FormButton},
+    data() {
+        return {
+            data: {name: "", info: "", imgSrc: "", price: ""},
+        };
+    },
+    methods: {
+        click() {},
+    },
+};
 </script>
 
-<style scoped lang="scss">
-input,
-textarea {
-  border: none;
-  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-  border-radius: 4px;
-  padding: 9px 9px 10px;
-  resize: none;
-}
-.addItemBlock {
-  width: 332px;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
+<style lang="scss" module>
+@import "../assets/scss/variables.scss";
+
+.root {
+    width: 332px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
 }
 
-.addItemBlock__form {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  background-color: #fffefb;
-  box-shadow: 0px 20px 30px rgba(0, 0, 0, 0.04),
-    0px 6px 10px rgba(0, 0, 0, 0.02);
-  border-radius: 4px;
-  min-height: 440px;
-  padding: 24px;
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    background-color: $grey-200;
+    box-shadow: $shadow-primary;
+    border-radius: 4px;
+    min-height: 440px;
+    padding: 24px;
 }
-.addItemBlock__title {
-  font-size: 28px;
-  color: #3f3f3f;
+
+.title {
+    font-size: 28px;
+    color: $black;
 }
 </style>
