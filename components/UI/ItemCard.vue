@@ -1,51 +1,95 @@
 <template>
-  <div class="itemCard">
-    <img src="../../assets/img/item-image.png" alt="Фото товара" />
-    <div class="itemCard__info">
-      <p class="itemCard__title">Наименование товара</p>
-      <p class="itemCard__description">
-        Довольно-таки интересное описание товара в несколько строк.
-        Довольно-таки интересное описание товара в несколько строк
-      </p>
-      <p class="itemCard__price">10 000р.</p>
+    <div :class="$style.root">
+        <img src="../../assets/img/item-image.png" width="332px" height="200px" alt="Фото товара" />
+        <div :class="$style.info">
+            <p :class="$style.title">Наименование товара</p>
+            <p :class="$style.description">
+                Довольно-таки интересное описание товара в несколько строк. Довольно-таки интересное описание товара в
+                несколько строк
+            </p>
+            <p :class="$style.price">10 000 руб.</p>
+        </div>
+        <button :class="$style.delCardBtn">
+            <Icon />
+        </button>
     </div>
-  </div>
 </template>
 
 <script>
-export default {};
+import Icon from "~/assets/img/del-btn.svg?inline";
+export default {name: "ItemCard", components: {Icon}};
 </script>
 
-<style scoped lang="scss">
-.itemCard {
-  width: 332px;
-  height: 423px;
-  background-color: #fffefb;
-  box-shadow: 0px 20px 30px rgba(0, 0, 0, 0.04),
-    0px 6px 10px rgba(0, 0, 0, 0.02);
-  border-radius: 4px;
-  color: #3f3f3f;
+<style lang="scss" module>
+@import "../../assets/scss/variables.scss";
+
+.root {
+    position: relative;
+    max-width: 332px;
+    background-color: $grey-200;
+    box-shadow: $shadow-primary;
+    border-radius: 4px;
+    color: $black;
+    cursor: pointer;
+
+    &:hover > .delCardBtn {
+        display: block;
+    }
 }
 
-.itemCard__info {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  min-height: 50%;
-  padding: 16px;
+.info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 50%;
+    max-width: 332px;
+    padding: 16px 16px 24px;
 }
 
-.itemCard__title {
-  font-size: 20px;
-  font-weight: 600;
+.title {
+    font-size: 20px;
+    font-weight: 600;
 }
 
-.itemCard__description {
-  font-size: 16px;
+.description {
+    font-size: 16px;
+    padding-top: 16px;
+    padding-bottom: 16px;
 }
 
-.itemCard__price {
-  font-size: 24px;
-  font-weight: 600;
+.price {
+    font-size: 24px;
+    font-weight: 600;
+    padding-top: 16px;
+}
+
+.delCardBtn {
+    display: none;
+    position: absolute;
+    background-repeat: no-repeat;
+    background-color: $pink;
+    border-radius: $border-radius--10;
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    border: none;
+    right: -8px;
+    top: -8px;
+    cursor: pointer;
+
+    &:hover {
+        background-color: lighten($pink, 10%);
+    }
+
+    &::after {
+        content: " ";
+        position: absolute;
+        background-image: url("../../assets/img/del-btn.svg");
+        height: 16px;
+        width: 16px;
+        display: block;
+        top: 8px;
+        left: 8px;
+    }
 }
 </style>

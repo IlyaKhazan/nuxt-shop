@@ -1,36 +1,59 @@
 <template>
-  <div class="itemList">
-    <ItemFilterBar />
-    <div class="itemList__cards">
-      <ItemCard />
-      <ItemCard />
-      <ItemCard />
-      <ItemCard />
-      <ItemCard />
-      <ItemCard />
-      <ItemCard />
-      <ItemCard />
-      <ItemCard />
-      <ItemCard />
-    </div>
-  </div>
+    <section :class="$style.root">
+        <FilterDropdown :class="$style.filterDropdown" :selected="selected" :sorts="sorts" @select="sortSelect" />
+        <div :class="$style.cards">
+            <ItemCard />
+            <ItemCard />
+            <ItemCard />
+            <ItemCard />
+            <ItemCard />
+            <ItemCard />
+            <ItemCard />
+            <ItemCard />
+            <ItemCard />
+            <ItemCard />
+        </div>
+    </section>
 </template>
 
 <script>
 import ItemCard from "./UI/ItemCard.vue";
-import ItemFilterBar from "./UI/ItemFilterBar.vue";
-export default { components: { ItemCard, ItemFilterBar } };
+import FilterDropdown from "./UI/FilterDropdown.vue";
+export default {
+    name: "ItemList",
+    components: {FilterDropdown, ItemCard},
+    data() {
+        return {
+            sorts: [
+                {name: "По умолчанию", value: "default"},
+                {name: "По мин. цене", value: "minPrice"},
+                {name: "По макс. цене", value: "maxPrice"},
+                {name: "По названию", value: "name"},
+            ],
+            selected: {name: "По умолчанию", value: "default"},
+        };
+    },
+    methods: {
+        sortSelect(sort) {
+            this.selected = sort;
+        },
+    },
+};
 </script>
 
-<style scoped lang="scss">
-.itemList {
-  width: 1028px;
-  gap: 16px;
+<style lang="scss" module>
+.root {
+    gap: 16px;
 }
 
-.itemList__cards {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 16px;
+.cards {
+    display: grid;
+    gap: 16px;
+    grid-template-columns: repeat(auto-fill, minmax(332px, 1fr));
+}
+
+.filterDropdown {
+    margin-left: auto;
+    margin-bottom: 16px;
 }
 </style>
