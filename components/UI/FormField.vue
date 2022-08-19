@@ -17,7 +17,15 @@
                 <span v-if="required" :class="$style.asterisk"></span>
                 <slot></slot>
             </span>
-            <input :class="[$style.input]" :value="value" :placeholder="placeholder" @input="updInput" />
+            <input
+                :class="{
+                    [$style.input]: true,
+                    [$style.error]: error,
+                }"
+                :value="value"
+                :placeholder="placeholder"
+                @input="updInput"
+            />
         </label>
     </div>
 </template>
@@ -42,9 +50,9 @@ export default {
             type: Boolean,
             default: false,
         },
-        labelId: {
-            type: String,
-            default: "",
+        error: {
+            type: Boolean,
+            default: false,
         },
         required: {
             type: Boolean,
@@ -92,6 +100,10 @@ export default {
     &:focus {
         outline: 1px solid $grey-100;
     }
+}
+
+.error {
+    border: 1px solid $pink;
 }
 
 .asterisk {

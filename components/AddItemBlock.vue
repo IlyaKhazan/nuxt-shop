@@ -2,19 +2,27 @@
     <section :class="$style.root">
         <h2 :class="$style.title">Добавление товара</h2>
         <form :class="$style.form" action="">
-            <FormField :class="$style.formField" v-model="data.name" placeholder="Введите наименование товара" required
+            <FormField
+                :class="$style.formField"
+                :error="data.name == ''"
+                v-model="data.name"
+                placeholder="Введите наименование товара"
+                required
                 >Наименование товара
             </FormField>
             <small :class="$style.error" v-if="!nameIsValid">Поле является обязательным</small>
             <FormField v-model="data.info" placeholder="Введите описание товара" textarea>Описание товара</FormField>
-            <FormField v-model="data.imgSrc" placeholder="Введите ссылку" required>
+            <FormField :error="data.imgSrc == ''" v-model="data.imgSrc" placeholder="Введите ссылку" required>
                 Ссылка на изображение товара
             </FormField>
             <small :class="$style.error" v-if="!imgSrcIsValid">Поле является обязательным</small>
-            <FormField v-model="data.price" placeholder="Введите цену" required>Цена товара</FormField>
+            <FormField :error="data.price == ''" v-model="data.price" placeholder="Введите цену" required
+                >Цена товара</FormField
+            >
             <small :class="$style.error" v-if="!priceIsValid">Поле является обязательным</small>
             <FormButton
                 :class="$style.formButton"
+                :error="!formIsValid"
                 text="Добавить товар"
                 @submit.prevent="checkForm"
                 :disabled="!formIsValid"
@@ -50,17 +58,7 @@ export default {
             return this.nameIsValid && this.imgSrcIsValid && this.priceIsValid;
         },
     },
-    methods: {
-        checkForm() {
-            const formIsValid = this.nameIsValid && this.imgSrcIsValid && this.priceIsValid;
-
-            if (formIsValid) {
-                console.log("valid");
-            } else {
-                console.log("not valid");
-            }
-        },
-    },
+    methods: {},
 };
 </script>
 
