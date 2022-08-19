@@ -9,15 +9,12 @@
             </p>
             <p :class="$style.price">10 000 руб.</p>
         </div>
-        <button :class="$style.delCardBtn">
-            <Icon />
-        </button>
+        <button :class="$style.delCardBtn"></button>
     </div>
 </template>
 
 <script>
-import Icon from "~/assets/img/del-btn.svg?inline";
-export default {name: "ItemCard", components: {Icon}};
+export default {name: "ItemCard"};
 </script>
 
 <style lang="scss" module>

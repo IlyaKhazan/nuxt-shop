@@ -2,15 +2,24 @@
     <section :class="$style.root">
         <h2 :class="$style.title">Добавление товара</h2>
         <form :class="$style.form" action="">
-            <FormField v-model="data.name" placeholder="Введите наименование товара" required
+            <FormField :class="$style.formField" v-model="data.name" placeholder="Введите наименование товара" required
                 >Наименование товара
             </FormField>
+            <small :class="$style.error" v-if="!nameIsValid">Поле является обязательным</small>
             <FormField v-model="data.info" placeholder="Введите описание товара" textarea>Описание товара</FormField>
             <FormField v-model="data.imgSrc" placeholder="Введите ссылку" required>
                 Ссылка на изображение товара
             </FormField>
+            <small :class="$style.error" v-if="!imgSrcIsValid">Поле является обязательным</small>
             <FormField v-model="data.price" placeholder="Введите цену" required>Цена товара</FormField>
-            <FormButton text="Добавить товар" @click="click" :disabled="true" />
+            <small :class="$style.error" v-if="!priceIsValid">Поле является обязательным</small>
+            <FormButton
+                :class="$style.formButton"
+                text="Добавить товар"
+                @submit.prevent="checkForm"
+                :disabled="!formIsValid"
+                :success="formIsValid"
+            />
         </form>
     </section>
 </template>
@@ -27,8 +36,30 @@ export default {
             data: {name: "", info: "", imgSrc: "", price: ""},
         };
     },
+    computed: {
+        nameIsValid() {
+            return !!this.data.name;
+        },
+        imgSrcIsValid() {
+            return !!this.data.imgSrc;
+        },
+        priceIsValid() {
+            return !!this.data.price;
+        },
+        formIsValid() {
+            return this.nameIsValid && this.imgSrcIsValid && this.priceIsValid;
+        },
+    },
     methods: {
-        click() {},
+        checkForm() {
+            const formIsValid = this.nameIsValid && this.imgSrcIsValid && this.priceIsValid;
+
+            if (formIsValid) {
+                console.log("valid");
+            } else {
+                console.log("not valid");
+            }
+        },
     },
 };
 </script>
@@ -43,10 +74,20 @@ export default {
     gap: 16px;
 }
 
+.formField {
+    margin-top: 0;
+    input {
+        border-color: $pink;
+    }
+}
+
+.formButton {
+    margin-top: 24px;
+}
+
 .form {
     display: flex;
     flex-direction: column;
-    gap: 16px;
     background-color: $grey-200;
     box-shadow: $shadow-primary;
     border-radius: 4px;
@@ -57,5 +98,10 @@ export default {
 .title {
     font-size: 28px;
     color: $black;
+}
+
+.error {
+    font-size: 8px;
+    color: $pink;
 }
 </style>
