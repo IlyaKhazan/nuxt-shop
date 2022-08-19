@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div :class="$style.root">
         <label :class="$style.label" v-if="textarea">
             <span :class="$style.labelText">
                 <span v-if="required" :class="$style.asterisk"></span>
@@ -61,6 +61,11 @@ export default {
 
 <style lang="scss" module>
 @import "../../assets/scss/variables.scss";
+
+.root {
+    margin-top: 16px;
+    margin-bottom: 4px;
+}
 
 .label {
     display: flex;
