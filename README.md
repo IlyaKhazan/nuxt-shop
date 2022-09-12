@@ -1,7 +1,4 @@
-Тестовое задание на позицию "Frontend developer" в компании idaproject
-
-Исплнитель: Илья Хазан
-
+Страница каталога Nuxt Shop
 
 Стек: Nuxt v. 2.15.8, VueJS 3
 Версия Node v16.13.2
@@ -11,11 +8,3 @@
 2) Далее запустить проект локально (http://localhost:3000/) командой "npm run dev";
 
 3) Для сборки проекта используйте команду "npm run build";
-
-
-Буду рад ответить на все вопросы. 
-Портфолио можно посмотреть на GitHub: https://github.com/IlyaKhazan
-
-Мои контакты:
-tel/whatsapp: +79067700518
-telegram: @ilya_kortes
